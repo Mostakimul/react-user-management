@@ -1,8 +1,10 @@
+import AppLayout from '../components/layout/AppLayout';
+
 const AddUser = () => {
   return (
-    <div>
+    <AppLayout>
       <h2>User Form</h2>
-    </div>
+    </AppLayout>
   );
 };
 
