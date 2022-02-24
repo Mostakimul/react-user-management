@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { deleteUser } from '../../features/user/userSlice';
 
 const SingleUser = ({ user, index }) => {
@@ -14,6 +15,7 @@ const SingleUser = ({ user, index }) => {
     console.log('User', id);
     dispatch(deleteUser(id));
     setShow(false);
+    toast.error('Deleted Successfully!');
   };
 
   return (
