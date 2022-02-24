@@ -34,7 +34,7 @@ const Home = () => {
   }
 
   return (
-    <AppLayout title="All Users">
+    <AppLayout title="All Users" showAdd>
       {allUsers.length <= 0 ? (
         <div className="alert alert-primary" role="alert">
           There is no user!!!

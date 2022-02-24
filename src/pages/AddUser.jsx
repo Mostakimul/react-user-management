@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import FormikControl from '../components/form/FormikControl';
@@ -81,7 +81,9 @@ const AddUser = () => {
                 name="city"
                 placeholder="Enter your city"
               />
-
+              <Button className="me-1" as={Link} to="/" variant="secondary">
+                Cancel
+              </Button>
               <Button
                 variant="primary"
                 type="submit"

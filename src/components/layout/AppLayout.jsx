@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { P } from '../../styles/Element.styled';
 import Header from '../common/Header';
 
-const AppLayout = ({ children, title }) => {
+const AppLayout = ({ children, title, showAdd }) => {
   return (
     <div>
       <Header />
@@ -13,9 +13,11 @@ const AppLayout = ({ children, title }) => {
             <Card>
               <Card.Header className="d-flex justify-content-between align-items-center">
                 <P className="fs-4 fw-bold">{title}</P>
-                <Button as={Link} to="/add-user" variant="primary" size="sm">
-                  Add New
-                </Button>
+                {showAdd && (
+                  <Button as={Link} to="/add-user" variant="primary" size="sm">
+                    Add New
+                  </Button>
+                )}
               </Card.Header>
               <Card.Body>{children}</Card.Body>
             </Card>
