@@ -23,8 +23,8 @@ const SingleUser = ({ user, index }) => {
       <tr>
         <td>{index + 1}</td>
         <td>{user?.name}</td>
-        <td>{user?.username}</td>
-        <td>{user?.address?.city}</td>
+        <td>{user?.username ? user?.username : '-'}</td>
+        <td>{user?.address?.city ? user?.address?.city : '-'}</td>
         <td>{user.email}</td>
         <td>
           <Button variant="warning" size="sm">

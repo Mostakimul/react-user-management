@@ -40,6 +40,10 @@ const userSlice = createSlice({
       const newUsers = users.filter(({ id }) => id !== action.payload);
       localStorage.setItem('users', JSON.stringify(newUsers));
     },
+    addUser: (state, action) => {
+      state.allUsers.push(action.payload);
+      localStorage.setItem('users', JSON.stringify(state.allUsers));
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -60,6 +64,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { reset, deleteUser } = userSlice.actions;
+export const { reset, deleteUser, addUser } = userSlice.actions;
 
 export default userSlice.reducer;
