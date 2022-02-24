@@ -20,7 +20,7 @@ const Home = () => {
       dispatch(fetchUsers());
     }
     setUserData(allUsers);
-  }, []);
+  }, [allUsers]);
 
   if (isLoading) {
     return (
