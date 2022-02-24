@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { deleteUser } from '../../features/user/userSlice';
 
@@ -12,7 +13,6 @@ const SingleUser = ({ user, index }) => {
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    console.log('User', id);
     dispatch(deleteUser(id));
     setShow(false);
     toast.error('Deleted Successfully!');
@@ -27,7 +27,12 @@ const SingleUser = ({ user, index }) => {
         <td>{user?.address?.city ? user?.address?.city : '-'}</td>
         <td>{user.email}</td>
         <td>
-          <Button variant="warning" size="sm">
+          <Button
+            as={Link}
+            to={`/edit-user/${user.id}`}
+            variant="warning"
+            size="sm"
+          >
             Edit
           </Button>
         </td>

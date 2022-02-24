@@ -1,24 +1,32 @@
 import { Form, Formik } from 'formik';
+import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import FormikControl from '../components/form/FormikControl';
 import AppLayout from '../components/layout/AppLayout';
-import { addUser } from '../features/user/userSlice';
+import { updateUser } from '../features/user/userSlice';
 import { FormFieldContainer } from '../styles/Form.styles';
 
-const AddUser = () => {
+const EditUser = () => {
+  const { id } = useParams();
+  const { allUsers } = useSelector((state) => state.users);
+  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const foundUser = allUsers.find((user) => user.id === parseInt(id));
+    setUser(foundUser);
+  }, [id, allUsers]);
+
   // initial values
   const initialValues = {
-    name: '',
-    username: '',
-    email: '',
-    city: '',
+    name: user?.name || '',
+    username: user?.username || '',
+    email: user?.email || '',
+    city: user?.address?.city || '',
   };
   // validation schema
   const validationSchema = Yup.object({
@@ -31,26 +39,25 @@ const AddUser = () => {
   // submit function
   onsubmit = (values) => {
     const userData = {
-      id: Math.floor(Math.random() * (1000 - 11)) + 11,
+      id: parseInt(id),
       name: values.name,
       username: values.username,
       email: values.email,
-      address: {
-        city: values.city,
-      },
+      city: values.city,
     };
 
-    dispatch(addUser(userData));
+    dispatch(updateUser(userData));
     navigate('/');
-    toast.success('User created successfully!');
+    toast.success('User updated successfully!');
   };
 
   return (
-    <AppLayout title="Create new user">
+    <AppLayout title="Edit user">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onsubmit}
+        enableReinitialize
       >
         {(formik) => (
           <Form>
@@ -101,4 +108,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default EditUser;

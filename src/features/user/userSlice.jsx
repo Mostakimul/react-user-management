@@ -44,6 +44,23 @@ const userSlice = createSlice({
       state.allUsers.push(action.payload);
       localStorage.setItem('users', JSON.stringify(state.allUsers));
     },
+    updateUser: (state, action) => {
+      const users = JSON.parse(localStorage.getItem('users'));
+      const newUsers = users.map((user) => {
+        if (user.id === action.payload.id) {
+          let { city, ...payloads } = action.payload;
+          let { address, ...userOthers } = user;
+          address = {
+            ...address,
+            city,
+          };
+          return { ...userOthers, address, ...payloads };
+        }
+        return user;
+      });
+      state.allUsers = newUsers;
+      localStorage.setItem('users', JSON.stringify(newUsers));
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -64,6 +81,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { reset, deleteUser, addUser } = userSlice.actions;
+export const { reset, deleteUser, addUser, updateUser } = userSlice.actions;
 
 export default userSlice.reducer;
