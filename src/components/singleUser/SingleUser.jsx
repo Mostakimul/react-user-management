@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { deleteUser } from '../../features/user/userSlice';
 
-const SingleUser = ({ user }) => {
+const SingleUser = ({ user, index }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -19,7 +19,7 @@ const SingleUser = ({ user }) => {
   return (
     <>
       <tr>
-        <td>{user?.id}</td>
+        <td>{index + 1}</td>
         <td>{user?.name}</td>
         <td>{user?.username}</td>
         <td>{user?.address?.city}</td>

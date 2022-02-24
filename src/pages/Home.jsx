@@ -46,8 +46,8 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {allUsers.map((user) => (
-            <SingleUser key={user.id} user={user} />
+          {allUsers.map((user, index) => (
+            <SingleUser key={user.id} user={user} index={index} />
           ))}
         </tbody>
       </Table>
