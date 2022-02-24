@@ -21,9 +21,11 @@ const Home = () => {
 
   if (isLoading) {
     return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <div className="d-flex justify-content-center mt-3">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
     );
   }
 
@@ -33,24 +35,30 @@ const Home = () => {
 
   return (
     <AppLayout title="All Users">
-      <Table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Username</th>
-            <th>City</th>
-            <th>Email</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allUsers.map((user, index) => (
-            <SingleUser key={user.id} user={user} index={index} />
-          ))}
-        </tbody>
-      </Table>
+      {allUsers.length <= 0 ? (
+        <div class="alert alert-primary" role="alert">
+          There is no user!!!
+        </div>
+      ) : (
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Username</th>
+              <th>City</th>
+              <th>Email</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allUsers.map((user, index) => (
+              <SingleUser key={user.id} user={user} index={index} />
+            ))}
+          </tbody>
+        </Table>
+      )}
     </AppLayout>
   );
 };
