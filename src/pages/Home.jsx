@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { Button, Spinner, Table } from 'react-bootstrap';
+import { Spinner, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import AppLayout from '../components/layout/AppLayout';
+import SingleUser from '../components/singleUser/SingleUser';
 import { fetchUsers } from '../features/user/userSlice';
 import { H2 } from '../styles/Element.styled';
 
@@ -45,27 +46,9 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {allUsers.map((user) => {
-            return (
-              <tr key={user.id}>
-                <td>{user?.id}</td>
-                <td>{user?.name}</td>
-                <td>{user?.username}</td>
-                <td>{user?.address?.city}</td>
-                <td>{user.email}</td>
-                <td>
-                  <Button variant="warning" size="sm">
-                    Edit
-                  </Button>
-                </td>
-                <td>
-                  <Button variant="danger" size="sm">
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            );
-          })}
+          {allUsers.map((user) => (
+            <SingleUser key={user.id} user={user} />
+          ))}
         </tbody>
       </Table>
     </AppLayout>
